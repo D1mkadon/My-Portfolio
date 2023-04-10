@@ -31,7 +31,7 @@ const About = () => {
           <p className={styles.AboutDescription}>
             Ukrainian - Native <br />
             English - C1 or B2 <br />
-            Germany - A2
+            Germany - A1
           </p>
         </div>
         <div className={styles.project}>

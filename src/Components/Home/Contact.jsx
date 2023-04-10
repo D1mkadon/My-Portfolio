@@ -5,7 +5,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import Link from "next/link";
 import { Controller, useForm, useFormState } from "react-hook-form";
-import { Button, TextField } from "@mui/material";
+import { Alert, Button, Snackbar, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
   emailValidation,
@@ -15,7 +15,7 @@ import {
 import axios from "axios";
 
 const Contact = () => {
-  const [text, setText] = useState();
+  const [open, setOpen] = useState(false);
   const { register, handleSubmit, watch, control, reset, formState, error } =
     useForm({
       defaultValues: {
@@ -27,8 +27,8 @@ const Contact = () => {
     });
   const { errors } = useFormState({ control });
   const onSubmit = (formData) => {
-    setText();
     console.log(formData);
+    setOpen(true);
     axios
       .request({
         method: "POST",
@@ -57,6 +57,13 @@ const Contact = () => {
       reset({ message: "", email: "", Subject: "" });
     }
   }, [formState, reset]);
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   return (
     <div id="Contact" className={styles.Contact}>
       <h3 className={styles.h3}>Contact Get in touch </h3>
@@ -177,8 +184,17 @@ const Contact = () => {
               Submit
             </Button>
           </form>
-          <div></div>
         </div>
+        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+          <Alert
+            variant="filled"
+            onClose={handleClose}
+            severity={"success"}
+            sx={{ width: "100%" }}
+          >
+            Message sent
+          </Alert>
+        </Snackbar>
       </div>
     </div>
   );
