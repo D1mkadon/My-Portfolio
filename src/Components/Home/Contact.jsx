@@ -27,28 +27,30 @@ const Contact = () => {
     });
   const { errors } = useFormState({ control });
   const onSubmit = (formData) => {
-    setText(`Name: ${formData.name}
-    Email: ${formData.email} 
-    Subject: ${formData.Subject}
-    Text: ${formData.message}`);
+    setText();
     console.log(formData);
-    axios({
-      method: "POST",
-      url: "https://api.telegram.org/bot5993729517%3AAAGH0zeA8vVn9WioAQajz2E0EG9MWgw9XQQ/sendMessage",
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-      },
-      data: {
-        text: `${text}`,
-        disable_web_page_preview: false,
-        disable_notification: false,
-        reply_to_message_id: null,
-        chat_id: "408787071",
-      },
-    }).then(function (response) {
-      console.log(response.data);
-    });
+    axios
+      .request({
+        method: "POST",
+        url: "https://api.telegram.org/bot5993729517%3AAAGH0zeA8vVn9WioAQajz2E0EG9MWgw9XQQ/sendMessage",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+        },
+        data: {
+          text: `Name: ${formData.name}
+        Email: ${formData.email} 
+        Subject: ${formData.Subject}
+        Text: ${formData.message}`,
+          disable_web_page_preview: false,
+          disable_notification: false,
+          reply_to_message_id: null,
+          chat_id: `408787071`,
+        },
+      })
+      .then(function (response) {
+        console.log(response.data);
+      });
   };
   useEffect(() => {
     if (formState.isSubmitSuccessful) {

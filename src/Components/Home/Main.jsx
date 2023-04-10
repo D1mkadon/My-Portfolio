@@ -2,12 +2,13 @@ import Image from "next/image";
 import styles from "./HomePage.module.scss";
 import Link from "next/link";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import myImage from "./myIcon.png";
 const Main = () => {
   return (
     <div id="Welcome" className={styles.welcome}>
       <Image
         className={styles.myImg}
-        src={"/myicon.png"}
+        src={myImage}
         alt="/"
         width={150}
         height={150}
