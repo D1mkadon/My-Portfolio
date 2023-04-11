@@ -31,7 +31,7 @@ const Contact = () => {
     setOpen(true);
     axios
       .request({
-        method: "POST",
+        method: "POST",  
         url: "https://api.telegram.org/bot5993729517%3AAAGH0zeA8vVn9WioAQajz2E0EG9MWgw9XQQ/sendMessage",
         headers: {
           accept: "application/json",
